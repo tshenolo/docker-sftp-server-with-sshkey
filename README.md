@@ -63,6 +63,11 @@ This project simplifies the deployment of a secure SFTP server using Docker. By 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## Thank you for the Support
+- ⭐ Give this repo a ⭐ star ⭐ at the top of the page
+- 🐦 Follow me on [X](https://twitter.com/tshenolo)
+- 📺 Subscribe to my [Youtube channel](https://www.youtube.com/@tshenolo?sub_confirmation=1)
+
 
 
 
