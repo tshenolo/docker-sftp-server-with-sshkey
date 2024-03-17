@@ -1,5 +1,9 @@
 # Docker SFTP Server
 
+![Alpine Linux](https://img.shields.io/badge/Alpine_Linux-%230D597F.svg?style=for-the-badge&logo=alpine-linux&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
+
 This repository contains the necessary files to deploy a secure SFTP server using Docker. The setup includes volume mounting for persistent storage, key-based authentication for enhanced security, and customizable SSH configurations.
 
 ## Table of Contents
