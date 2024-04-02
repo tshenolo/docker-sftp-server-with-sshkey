@@ -18,6 +18,9 @@ This repository contains the necessary files to deploy a secure SFTP server usin
 - [Conclusion](#conclusion) 
 - [License](#license)
 
+## 🎬 Video demonstration
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/NpEaa2P7qZI/0.jpg)](https://www.youtube.com/watch?v=NpEaa2P7qZI)
+
 ## Prerequisites
 
 Before starting, ensure you have Docker installed and running on your machine. Basic knowledge of Docker, SSH, and SFTP is also recommended.
