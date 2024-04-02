@@ -13,7 +13,8 @@ This repository contains the necessary files to deploy a secure SFTP server usin
 	- [SSH Key Configuration](#ssh-key-configuration)  
 	- [Clone this repository](#clone-this-repository) 
 	- [Build the Docker image](#build-the-docker-image) 
-	- [Run the Docker container](#run-the-dockrer-container)   
+	- [Run the Docker container](#run-the-dockrer-container)
+  - [Connecting to the SFTP Server](#connecting-to-the-sftp-server)   
 - [Conclusion](#conclusion) 
 - [License](#license)
 
@@ -68,6 +69,12 @@ docker run -d --name my_sftp_container -p 2222:22 your_sftp_server
 To ensure that uploaded files are not lost when the container stops or is removed, you should persist data by mapping a directory from your host machine to a directory inside the container
 ```bash
 docker run -d -v /local/sftp/upload:/home/your_user/sftp/upload --name my_sftp_container -p 2222:22 your_sftp_server
+```
+
+### Connecting to the SFTP Server
+Connect to your SFTP server using:
+```bash
+sftp -oPort=2222 your_user@0.0.0.0
 ```
 
 ## Conclusion
