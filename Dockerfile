@@ -24,16 +24,19 @@ RUN chmod 600 /home/your_user/.ssh/authorized_keys && \
     chown your_user:your_user /home/your_user/.ssh/authorized_keys
 
 # Create a directory for SFTP that the user will have access to
-RUN mkdir -p /home/your_user/sftp
-RUN chown root:root /home/your_user /home/your_user/sftp
-RUN chmod 755 /home/your_user /home/your_user/sftp
+RUN mkdir -p /home/your_user/sftp/upload && \
+    chown root:root /home/your_user /home/your_user/sftp && \
+    chmod 755 /home/your_user /home/your_user/sftp && \
+    chown your_user:your_user /home/your_user/sftp/upload && \
+    chmod 755 /home/your_user/sftp/upload
 
 # Configure SSH for SFTP
 RUN mkdir -p /run/sshd && \
     echo "Match User your_user" >> /etc/ssh/sshd_config && \
     echo "    ChrootDirectory /home/your_user/sftp" >> /etc/ssh/sshd_config && \
     echo "    ForceCommand internal-sftp" >> /etc/ssh/sshd_config && \
-    echo "    PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
+    echo "    PasswordAuthentication no" >> /etc/ssh/sshd_config && \
+    echo "    PubkeyAuthentication yes" >> /etc/ssh/sshd_config && \
     echo "    PermitTunnel no" >> /etc/ssh/sshd_config && \
     echo "    AllowAgentForwarding no" >> /etc/ssh/sshd_config && \
     echo "    AllowTcpForwarding no" >> /etc/ssh/sshd_config && \
