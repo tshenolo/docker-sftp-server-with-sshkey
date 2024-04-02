@@ -10,12 +10,11 @@ This repository contains the necessary files to deploy a secure SFTP server usin
 
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
-- [Configuration](#configuration)
-  - [Volume Mounting](#volume-mounting)
-  - [Key-Based Authentication](#key-based-authentication)
-  - [Custom SSH Configuration](#custom-ssh-configuration)
-- [Building and Running](#building-and-running)
-- [Conclusion](#conclusion)
+	- [SSH Key Configuration](#ssh-key-configuration)  
+	- [Clone this repository](#clone-this-repository) 
+	- [Build the Docker image](#build-the-docker-image) 
+	- [Run the Docker container](#run-the-dockrer-container)   
+- [Conclusion](#conclusion) 
 - [License](#license)
 
 ## Prerequisites
@@ -23,39 +22,53 @@ This repository contains the necessary files to deploy a secure SFTP server usin
 Before starting, ensure you have Docker installed and running on your machine. Basic knowledge of Docker, SSH, and SFTP is also recommended.
 
 ## Quick Start
+### SSH Key Configuration  
+Generate SSH Key: If you do not already have an SSH key pair, you can generate one using the following command:
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f $HOME/.ssh/id_rsa
+```
 
-1. Clone this repository to your local machine:
+Ensure your private key (~/.ssh/id_rsa) is kept secure with the appropriate permissions:
+```bash
+chmod 600 ~/.ssh/id_rsa
+```
+
+Load your SSH key into the SSH agent by running:
+```bash
+ssh-add ~/.ssh/id_rsa
+```
+
+### Clone this repository:
 ```bash
 git clone https://github.com/tshenolo/docker-sftp.git
+```
+
+Change your current working directory to the newly cloned repository:
+```bash
 cd docker-sftp
 ```
-This Dockerfile includes comments to guide modifications such as setting the username and integrating the public SSH key. Before building your Docker image, ensure to replace placeholder values (your_user, your_public_key) with actual data. Additionally, to implement the key-based authentication securely, uncomment and modify the line that adds the public key to authorized_keys, and ensure you have the corresponding public key file (your_user.pub) available.
 
-2. Build the Docker image:
+To ensure SSH key-based authentication for your SFTP server, place your SSH public key into the working directory:
+```bash
+cp $HOME/.ssh/id_rsa.pub .
+```
+
+
+### Build the Docker image:
 ```bash
 docker build -t my-sftp-server .
 ```
 
-3. Run the Docker container:
+### Run the Docker container:  
+To run your SFTP server container without data persistence, you might use a command like this:
 ```bash
-docker run -d -p 22:22 my-sftp-server
+docker run -d --name my_sftp_container -p 2222:22 your_sftp_server
 ```
 
-## Configuration
-### Volume Mounting
-To persist data and facilitate file management, mount a volume from the host to the container's SFTP directory:
+To ensure that uploaded files are not lost when the container stops or is removed, you should persist data by mapping a directory from your host machine to a directory inside the container
 ```bash
-docker run -d -p 22:22 -v /path/to/your/host/directory:/home/your_user/sftp my-sftp-server
+docker run -d -v /local/sftp/upload:/home/your_user/sftp/upload --name my_sftp_container -p 2222:22 your_sftp_server
 ```
-
-### Key-Based Authentication
-You can customize the sshd_config file to meet specific requirements, such as setting up chroot environments or adjusting login permissions. See the Dockerfile for examples.
-
-### Custom SSH Configuration
-You can customize the sshd_config file to meet specific requirements, such as setting up chroot environments or adjusting login permissions. See the Dockerfile for examples.
-
-## Building and Running
-After configuring, rebuild the Docker image and run the container with your adjustments. For detailed steps, refer to the sections above.
 
 ## Conclusion
 This project simplifies the deployment of a secure SFTP server using Docker. By leveraging Docker's capabilities, you can ensure data persistence, enhance security, and customize configurations to suit your needs.
