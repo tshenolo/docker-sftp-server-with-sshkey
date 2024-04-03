@@ -68,7 +68,7 @@ docker build -t my-sftp-server .
 ### Run the Docker container:  
 To run your SFTP server container without data persistence, you might use a command like this:
 ```bash
-docker run -d --name my_sftp_container -p 2222:22 your_sftp_server
+docker run -d --name my_sftp_container -p 2222:22 my-sftp-server
 ```
 
 To ensure that uploaded files are not lost when the container stops or is removed, you should persist data by mapping a directory from your host machine to a directory inside the container
