@@ -79,7 +79,7 @@ docker run -d -v /local/sftp/upload:/home/sftpuser/sftp/upload --name my_sftp_co
 ### Connecting to the SFTP Server
 Connect to your SFTP server using:
 ```bash
-sftp -oPort=2222 sftpuser@0.0.0.0
+sftp -oPort=2222 sftpuser@localhost
 ```
 
 ## Conclusion
