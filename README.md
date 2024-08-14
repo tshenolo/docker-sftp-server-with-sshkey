@@ -73,7 +73,7 @@ docker run -d --name my_sftp_container -p 2222:22 my-sftp-server
 
 To ensure that uploaded files are not lost when the container stops or is removed, you should persist data by mapping a directory from your host machine to a directory inside the container
 ```bash
-docker run -d -v /local/sftp/upload:/home/sftpuser/sftp/upload --name my_sftp_container -p 2222:22 your_sftp_server
+docker run -d -v /local/sftp/upload:/home/sftpuser/sftp/upload --name my_sftp_container -p 2222:22 my-sftp-server
 ```
 
 ### Connecting to the SFTP Server
