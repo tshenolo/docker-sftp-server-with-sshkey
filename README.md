@@ -31,17 +31,17 @@ This repository contains the necessary files to deploy a secure SFTP server usin
 ### SSH Key Configuration  
 Generate SSH Key: If you do not already have an SSH key pair, you can generate one using the following command:
 ```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f $HOME/.ssh/id_rsa
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f $HOME/.ssh/docker_rsa
 ```
 
-Ensure your private key (~/.ssh/id_rsa) is kept secure with the appropriate permissions:
+Ensure your private key (~/.ssh/docker_rsa) is kept secure with the appropriate permissions:
 ```bash
-chmod 600 ~/.ssh/id_rsa
+chmod 600 ~/.ssh/docker_rsa
 ```
 
 Load your SSH key into the SSH agent by running:
 ```bash
-ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/docker_rsa
 ```
 
 ### Clone this repository:
@@ -56,7 +56,7 @@ cd docker-sftp-server-with-sshkey
 
 To ensure SSH key-based authentication for your SFTP server, place your SSH public key into the working directory:
 ```bash
-cp $HOME/.ssh/id_rsa.pub .
+cp $HOME/.ssh/docker_rsa.pub .
 ```
 
 
@@ -73,13 +73,13 @@ docker run -d --name my_sftp_container -p 2222:22 my-sftp-server
 
 To ensure that uploaded files are not lost when the container stops or is removed, you should persist data by mapping a directory from your host machine to a directory inside the container
 ```bash
-docker run -d -v /local/sftp/upload:/home/your_user/sftp/upload --name my_sftp_container -p 2222:22 your_sftp_server
+docker run -d -v /local/sftp/upload:/home/sftpuser/sftp/upload --name my_sftp_container -p 2222:22 your_sftp_server
 ```
 
 ### Connecting to the SFTP Server
 Connect to your SFTP server using:
 ```bash
-sftp -oPort=2222 your_user@0.0.0.0
+sftp -oPort=2222 sftpuser@0.0.0.0
 ```
 
 ## Conclusion
