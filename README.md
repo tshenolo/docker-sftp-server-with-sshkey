@@ -46,12 +46,12 @@ ssh-add ~/.ssh/id_rsa
 
 ### Clone this repository:
 ```bash
-git clone https://github.com/tshenolo/docker-sftp.git
+git clone https://github.com/tshenolo/docker-sftp-server-with-sshkey.git
 ```
 
 Change your current working directory to the newly cloned repository:
 ```bash
-cd docker-sftp
+cd docker-sftp-server-with-sshkey
 ```
 
 To ensure SSH key-based authentication for your SFTP server, place your SSH public key into the working directory:
